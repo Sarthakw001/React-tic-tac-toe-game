@@ -15,6 +15,9 @@ import "./App.css";
 import { Card, CardBody, Container, Button, Col, Row } from "reactstrap";
 
 // itemArray
+
+import confetti from "canvas-confetti";
+
 const itemArray = new Array(9).fill("empty");
 
 // main Component
@@ -38,48 +41,56 @@ const App = () => {
       itemArray[0] === itemArray[2]
     ) {
       setWinMsg(`${itemArray[0]} wins`);
+      celebrate();
     } else if (
       itemArray[3] !== "empty" &&
       itemArray[3] === itemArray[4] &&
       itemArray[3] === itemArray[5]
     ) {
       setWinMsg(`${itemArray[3]} wins`);
+      celebrate();
     } else if (
       itemArray[6] !== "empty" &&
       itemArray[6] === itemArray[7] &&
       itemArray[6] === itemArray[8]
     ) {
       setWinMsg(`${itemArray[6]} wins`);
+      celebrate();
     } else if (
       itemArray[0] !== "empty" &&
       itemArray[0] === itemArray[4] &&
       itemArray[0] === itemArray[8]
     ) {
       setWinMsg(`${itemArray[0]} wins`);
+      celebrate();
     } else if (
       itemArray[2] !== "empty" &&
       itemArray[2] === itemArray[4] &&
       itemArray[2] === itemArray[6]
     ) {
       setWinMsg(`${itemArray[2]} wins`);
+      celebrate();
     } else if (
       itemArray[0] !== "empty" &&
       itemArray[0] === itemArray[3] &&
       itemArray[0] === itemArray[6]
     ) {
       setWinMsg(`${itemArray[0]} wins`);
+      celebrate();
     } else if (
       itemArray[1] !== "empty" &&
       itemArray[1] === itemArray[4] &&
       itemArray[1] === itemArray[7]
     ) {
       setWinMsg(`${itemArray[1]} wins`);
+      celebrate();
     } else if (
       itemArray[2] !== "empty" &&
       itemArray[2] === itemArray[5] &&
       itemArray[2] === itemArray[8]
     ) {
       setWinMsg(`${itemArray[2]} wins`);
+      celebrate();
     }
   };
 
@@ -111,7 +122,33 @@ const App = () => {
     checkIsWinner();
   };
   // change Style of Item
+  function celebrate() {
+    var end = Date.now() + (1 * 1000);
 
+    // go Buckeyes!
+    var colors = ['#bb0000', '#ffffff'];
+    
+    (function frame() {
+      confetti({
+        particleCount: 2,
+        angle: 60,
+        spread: 55,
+        origin: { x: 0 },
+        colors: colors
+      });
+      confetti({
+        particleCount: 2,
+        angle: 120,
+        spread: 55,
+        origin: { x: 1 },
+        colors: colors
+      });
+    
+      if (Date.now() < end) {
+        requestAnimationFrame(frame);
+      }
+    }());
+  }
   //return the Component
   return (
     <Container className="p-5">
